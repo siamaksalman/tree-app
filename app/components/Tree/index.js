@@ -142,16 +142,14 @@ class Demo extends React.Component {
     });
   }
 
-  renderTitle = () => {
+  renderTitle = () => (
     <>
       <h2>draggable</h2>
       <p>drag a node into another node</p>
     </>
-  }
+  )
+
   render() {
-
-    console.log(" tree component is callded here now " , this.props, '*****')
-
     const loop = data => {
       return data.map((item) => {
         if (item.children && item.children.length) {
@@ -162,8 +160,7 @@ class Demo extends React.Component {
     };
     return (
     <div className="draggable-demo">
-      {this.props.nodeId && <h3>Search</h3>}
-      {!!this.props.nodeId && this.renderTitle()}
+      {this.renderTitle()}
       <div className="draggable-container">
         <Tree
           expandedKeys={this.state.expandedKeys}

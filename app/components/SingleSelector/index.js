@@ -32,7 +32,7 @@ export default function SimpleSelect(props) {
   return (
     <form className={classes.root} autoComplete="off">
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-simple">Age</InputLabel>
+        <InputLabel htmlFor="age-simple">Node Name</InputLabel>
         <Select
           value={values.label}
           onChange={handleChange}
