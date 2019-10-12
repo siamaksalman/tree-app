@@ -3,7 +3,6 @@ const api = {
   tree: {
     searchDescenders: '/tree/search',
     changeNodeParents: '/tree/update',
-    getTree: '/app',
   },
 };
 

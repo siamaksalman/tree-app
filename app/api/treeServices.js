@@ -22,7 +22,7 @@ export function changeParents(srcNode, tarNode) {
 }
 
 export function getTree() {
-  const url = config.backendBasURL.concat(config.api.tree.getTree);
+  const url = config.backendBasURL;
   return request({
     method: 'GET',
     url,
