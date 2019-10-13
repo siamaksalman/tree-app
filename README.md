@@ -11,11 +11,11 @@ This project was bootstrapped with [React Boilerplate](https://github.com/react-
 
 ```bash
 # development
-npm run start
+npm start
 
 ```
 Alternatively you may use `yarn`:
 
 ```sh
-yarn add react-router
+yarn start
 ```
