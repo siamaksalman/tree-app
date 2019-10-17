@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  tree-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true        # for beautiful debug and pretty error output 
+    stdin_open: true # not working with up command 
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_SERVER_ADDR=http://localhost:3333
+    ports:
+      - 3000:3000
+
+  proxy:
+    image: nginx:1.13-alpine
+    ports:
+      - 80:80
+    restart: always
+    links:
+      - tree-app
