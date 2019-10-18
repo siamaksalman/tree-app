@@ -23,7 +23,7 @@ RUN yarn build
 
 # next stage: prepare production environment
 FROM nginx:alpine
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 RUN mkdir -p /app/current && \
   chown -R nginx:nginx /app
