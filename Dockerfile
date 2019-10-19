@@ -22,11 +22,8 @@ ARG REACT_APP_SERVER_ADDR
 RUN yarn build
 
 # next stage: prepare production environment
-FROM nginx:alpine
+FROM bitnami/nginx:latest
 ENV NODE_ENV=production
 
-RUN mkdir -p /app/current && \
-  chown -R nginx:nginx /app
-
-COPY --from=build --chown=nginx:nginx /app/build /app/current
-COPY --from=build --chown=nginx:nginx /app/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/build /app
+COPY --from=build /app/nginx.conf /opt/bitnami/nginx/conf/nginx.conf:ro
