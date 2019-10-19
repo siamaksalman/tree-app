@@ -11,11 +11,14 @@ This project was bootstrapped with [React Boilerplate](https://github.com/react-
 
 ```bash
 # development
-npm start
+npm  un start
 
 ```
 Alternatively you may use `yarn`:
 
 ```sh
-yarn start
+yarn run start
 ```
+
+## Note About Tree GUT
+In case of updating the tree, [rc-tree package](https://www.npmjs.com/package/rc-tree), sometimes, displays wrong drag & drop while server has been updated the correct ones.
