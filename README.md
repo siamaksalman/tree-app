@@ -11,7 +11,7 @@ This project was bootstrapped with [React Boilerplate](https://github.com/react-
 
 ```bash
 # development
-npm  un start
+npm  run start
 
 ```
 Alternatively you may use `yarn`:
