@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './SearchWrapper.css';
-import { getTree, findDescenders } from 'api/treeServices';
+import { findDescenders, getTree } from 'api/treeServices';
+import { SimpleSnackBar } from 'components/Snackbar/';
 import SingleSelector from 'components/SingleSelector/';
+import './SearchWrapper.css';
 
-function NodeTable(props) {
+function SearchTable(props) {
   return <table className='user-request-table'>
     <thead className='th' >
       <tr>
@@ -37,33 +38,44 @@ function SearchWrapper() {
     getNodeInfo();
   }, []);
 
-  const [tNodes, setTNodes] = useState([]);
-  const [leaf, setLeaf] = useState(false);
-  const [nodeOptions, setNodeOptions] = useState([]);
+  const [leaf, setLeaf]                 = useState(false);
+  const [nodeOptions, setNodeOptions]   = useState([]);
+  const [showSnackBar, setShowSnackBar] = useState(false)
+  const [tNodes, setTNodes]             = useState([]);
 
   const getNodeInfo = async () => {
-    const tNodes = await getTree();
-    const nodeList = tNodes.map(node => ({ key: node._id, label: node.name }))
+    const { status, res } = await getTree();
+    const nodeList = res.map(node => ({ key: node._id, label: node.name }))
     setNodeOptions(nodeList)
   }
 
   const search = async id => {
-    const tNodes = await findDescenders(id);
-    if (tNodes.length > 0){
-      setTNodes(tNodes);
+    const { status , res } = await findDescenders(id);
+    if ( status === 200 && res.length > 0){
+      setTNodes(res);
       setLeaf(false);
     }
-    else{
+    else if(status === 200 && res.length === 0){
       setTNodes([]);
       setLeaf(true);
+    }
+    else {
+      setShowSnackBar(true);
+      setTNodes([]);
+      setLeaf(false);
     }
   };
 
   return (
     <div className="search-container">
       <SingleSelector onSearch={search} options={nodeOptions} />
-      {tNodes.length > 0 && <NodeTable tNodes={tNodes} />}
+      {tNodes.length > 0 && <SearchTable tNodes={tNodes} />}
       {leaf && <h3>{'is leaf :)'}</h3>}
+      {showSnackBar && <SimpleSnackBar
+        variant="error"
+        message="The requested node is not valid!"
+        onClose={() => setShowSnackBar(false)}
+      />}
     </div>
   );
 }
