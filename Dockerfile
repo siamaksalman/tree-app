@@ -22,7 +22,7 @@ ARG REACT_APP_SERVER_ADDR
 RUN yarn build
 
 # next stage: prepare production environment
-FROM bitnami/nginx:latest
+FROM bitnami/nginx:1.12.0-r0
 ENV NODE_ENV=production
 
 COPY --from=build /app/build /app
